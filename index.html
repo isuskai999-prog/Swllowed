@@ -459,16 +459,6 @@
           AUTHENTICATION REQUIRED
         </p>
 
-        <!-- Discreet Credential Hint Box for Owner Testing -->
-        <div class="mb-6 rounded-xl bg-white/[0.04] border border-white/10 p-3 text-left">
-          <p class="font-mono text-[10px] text-amber-200/80 uppercase tracking-wider mb-1">
-            <i class="fa-solid fa-key mr-1"></i> Single-Admin Access Key
-          </p>
-          <p class="font-mono text-[11px] text-white/65">
-            User: <span class="text-white select-all">admin</span> &nbsp;|&nbsp; Pass: <span id="hint-pass-display" class="text-white select-all">swallowed2024</span>
-          </p>
-        </div>
-
         <form onsubmit="handleAdminLogin(event)" class="space-y-4 text-left">
           <div>
             <label class="block font-mono text-[10px] tracking-[0.2em] uppercase text-white/60 mb-1.5 ml-1">
@@ -1066,7 +1056,6 @@
       } catch (e) {
         members = [...DEFAULT_MEMBERS];
       }
-      document.getElementById('hint-pass-display').textContent = adminPassword;
     }
 
     function saveRoster() {
@@ -1757,7 +1746,6 @@
       if (newPass.length < 4) return;
       adminPassword = newPass;
       localStorage.setItem(ADMIN_PASS_KEY, adminPassword);
-      document.getElementById('hint-pass-display').textContent = adminPassword;
       closeChangePasswordModal();
       showToast('Admin password updated successfully');
     }
