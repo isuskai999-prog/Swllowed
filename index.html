@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SWALLOWED — SINCE 2024</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Cinzel, Cormorant Garamond, Plus Jakarta Sans, Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+            display: ['Cinzel', 'Cormorant Garamond', 'serif'],
+            serif: ['Cormorant Garamond', 'Cinzel', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            obsidian: '#050507',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #050507;
+      color: #f3f4f6;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Deep Obsidian Midnight Lounge Scene */
+    .bg-scene {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background-image:
+        radial-gradient(circle at 50% 25%, rgba(30, 32, 44, 0.38) 0%, rgba(5, 5, 7, 0.94) 85%),
+        linear-gradient(180deg, rgba(5, 5, 7, 0.72) 0%, rgba(8, 9, 13, 0.55) 45%, rgba(5, 5, 7, 0.96) 100%),
+        url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=2000&q=80');
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(60%) contrast(115%) brightness(62%);
+      transform: scale(1.04);
+      transition: filter 0.6s ease, transform 0.8s ease;
+    }
+
+    .bg-scene.blurred {
+      filter: grayscale(70%) contrast(118%) brightness(48%) blur(6px);
+    }
+
+    /* Ambient Particles Canvas */
+    #ambient-particles {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    /* Soft Radial Spotlight & Vignette */
+    .bg-vignette {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.045) 0%, transparent 55%),
+        radial-gradient(ellipse at center, transparent 35%, rgba(2, 2, 4, 0.88) 100%);
+    }
+
+    /* Smoked Glassmorphism Panels & Cards */
+    .glass-panel {
+      background: rgba(15, 16, 22, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    }
+
+    .glass-card {
+      background: rgba(15, 16, 22, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+    }
+
+    .glass-card:hover {
+      background: rgba(24, 26, 36, 0.85);
+      border-color: rgba(255, 255, 255, 0.32);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 22px rgba(255, 255, 255, 0.06);
+    }
+
+    .glass-card-leader {
+      background: linear-gradient(145deg, rgba(24, 23, 28, 0.82) 0%, rgba(14, 15, 21, 0.78) 100%);
+      border: 1px solid rgba(234, 212, 162, 0.28);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(234, 212, 162, 0.14);
+    }
+
+    .glass-card-leader:hover {
+      border-color: rgba(234, 212, 162, 0.55);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 26px rgba(234, 212, 162, 0.12);
+    }
+
+    .glass-pill-btn {
+      background: rgba(15, 16, 22, 0.74);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-pill-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 0 28px rgba(255, 255, 255, 0.14);
+      transform: translateY(-2px);
+    }
+
+    /* Smooth View Transitions */
+    .view-section {
+      animation: fadeSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050507;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.36);
+    }
+
+    /* Equalizer animation for music player */
+    @keyframes eqBar {
+      0%, 100% { height: 4px; }
+      50% { height: 14px; }
+    }
+    .eq-playing .eq-1 { animation: eqBar 0.7s ease-in-out infinite; }
+    .eq-playing .eq-2 { animation: eqBar 0.5s ease-in-out infinite 0.15s; }
+    .eq-playing .eq-3 { animation: eqBar 0.8s ease-in-out infinite 0.3s; }
+  </style>
+</head>
+<body class="antialiased selection:bg-white/20 selection:text-white flex flex-col min-h-screen">
+
+  <!-- Ambient Fullscreen Background Layers -->
+  <div id="bg-scene" class="bg-scene"></div>
+  <canvas id="ambient-particles"></canvas>
+  <div class="bg-vignette"></div>
+
+  <!-- Top Floating Navigation Pill Bar -->
+  <header id="top-nav-container" class="fixed top-5 left-0 right-0 z-40 flex justify-center px-4">
+    <nav class="glass-panel rounded-full px-3 py-1.5 flex items-center gap-1 sm:gap-2">
+      <!-- Brand Mark -->
+      <button onclick="navigateTo('home')" class="hidden sm:flex items-center gap-2 pl-2.5 pr-3 py-1 border-r border-white/10 text-white/90 hover:text-white transition-colors">
+        <i class="fa-solid fa-crown text-[10px] text-amber-200/80"></i>
+        <span class="font-display text-[11px] font-bold tracking-[0.26em] uppercase">SWALLOWED</span>
+      </button>
+
+      <button onclick="navigateTo('home')" id="nav-home"
+        class="nav-pill px-4 py-1.5 rounded-full text-[11px] font-sans font-semibold tracking-[0.18em] uppercase text-white/75 hover:text-white transition-all flex items-center gap-2">
+        <i class="fa-solid fa-house text-[10px]"></i>
+        <span>HOME</span>
+      </button>
+
+      <button onclick="navigateTo('members')" id="nav-members"
+        class="nav-pill px-4 py-1.5 rounded-full text-[11px] font-sans font-semibold tracking-[0.18em] uppercase text-white/75 hover:text-white transition-all flex items-center gap-2">
+        <i class="fa-solid fa-users text-[10px]"></i>
+        <span>MEMBERS</span>
+      </button>
+
+      <button onclick="navigateTo('admin')" id="nav-admin"
+        class="nav-pill px-4 py-1.5 rounded-full text-[11px] font-sans font-semibold tracking-[0.18em] uppercase text-white/75 hover:text-white transition-all flex items-center gap-2">
+        <i id="nav-admin-icon" class="fa-solid fa-lock text-[10px]"></i>
+        <span id="nav-admin-label">ADMIN</span>
+        <span id="nav-admin-badge" class="hidden w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-grow flex flex-col justify-center items-center w-full px-4 pt-24 pb-24">
+
+    <!-- ==================== 1. HOME LANDING VIEW ==================== -->
+    <section id="view-home" class="view-section w-full max-w-4xl mx-auto flex flex-col items-center justify-center text-center my-auto">
+      <!-- Top Wide-Tracked Header -->
+      <h1 class="font-display text-white/95 text-2xl sm:text-4xl md:text-[44px] font-semibold tracking-[0.42em] uppercase mb-6 sm:mb-8 pl-[0.42em] drop-shadow-[0_6px_28px_rgba(0,0,0,0.9)]">
+        SWALLOWED
+      </h1>
+
+      <!-- Custom Gothic Wings + Serpent/Crown Silver Crest SVG -->
+      <div class="relative mb-8 sm:mb-10 group select-none">
+        <div class="absolute inset-0 bg-white/5 rounded-full blur-3xl scale-110 opacity-60 group-hover:opacity-95 transition-opacity duration-700"></div>
+        <svg class="w-72 sm:w-84 md:w-[370px] h-auto relative z-10 drop-shadow-[0_14px_34px_rgba(0,0,0,0.9)] transition-transform duration-700 group-hover:scale-[1.02]" viewBox="0 0 440 275" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="platinumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFFFFF" />
+              <stop offset="30%" stop-color="#E4E4E7" />
+              <stop offset="65%" stop-color="#71717A" />
+              <stop offset="100%" stop-color="#F4F4F5" />
+            </linearGradient>
+            <linearGradient id="goldAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FDE68A" />
+              <stop offset="50%" stop-color="#D4AF37" />
+              <stop offset="100%" stop-color="#FEF3C7" />
+            </linearGradient>
+            <linearGradient id="obsidianShield" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#27272A" />
+              <stop offset="100%" stop-color="#09090B" />
+            </linearGradient>
+          </defs>
+
+          <!-- Left Ornate Gothic Wing -->
+          <g fill="url(#platinumGrad)" opacity="0.95">
+            <path d="M174 126 C126 104, 68 62, 26 28 C46 66, 86 96, 150 134 Z" />
+            <path d="M168 136 C114 120, 62 92, 20 66 C46 100, 90 124, 148 144 Z" />
+            <path d="M164 146 C114 138, 70 122, 36 106 C64 130, 102 146, 150 153 Z" />
+            <path d="M166 155 C124 154, 88 146, 58 138 C84 156, 118 162, 156 161 Z" />
+            <path d="M172 164 C138 168, 108 166, 86 163 C110 174, 138 175, 166 170 Z" />
+          </g>
+
+          <!-- Right Ornate Gothic Wing -->
+          <g fill="url(#platinumGrad)" opacity="0.95">
+            <path d="M266 126 C314 104, 372 62, 414 28 C394 66, 354 96, 290 134 Z" />
+            <path d="M272 136 C326 120, 378 92, 420 66 C394 100, 350 124, 292 144 Z" />
+            <path d="M276 146 C326 138, 370 122, 404 106 C376 130, 338 146, 290 153 Z" />
+            <path d="M274 155 C316 154, 352 146, 382 138 C356 156, 322 162, 284 161 Z" />
+            <path d="M268 164 C302 168, 332 166, 354 163 C330 174, 302 175, 274 170 Z" />
+          </g>
+
+          <!-- Sovereign Crown -->
+          <g fill="url(#platinumGrad)" stroke="rgba(255,255,255,0.45)" stroke-width="1">
+            <path d="M178 148 L262 148 L256 158 L184 158 Z" />
+            <path d="M180 146 L172 106 L197 129 L220 88 L243 129 L268 106 L260 146 Z" />
+            <circle cx="171" cy="101" r="4" fill="#FFFFFF" />
+            <circle cx="220" cy="82" r="5.5" fill="url(#goldAccent)" />
+            <circle cx="269" cy="101" r="4" fill="#FFFFFF" />
+            <path d="M220 68 V77 M216 72 H224" stroke="url(#goldAccent)" stroke-width="2" stroke-linecap="round" />
+          </g>
+
+          <!-- Central Shield & Coiled Serpent Emblem -->
+          <path d="M186 162 H254 L247 188 L220 202 L193 188 Z" fill="url(#obsidianShield)" stroke="url(#platinumGrad)" stroke-width="1.5" />
+          <!-- Serpent S-Curve Motif inside Shield -->
+          <path d="M228 169 C212 167, 208 177, 221 181 C234 185, 230 194, 213 193" stroke="url(#goldAccent)" stroke-width="2.5" stroke-linecap="round" fill="none" />
+          <circle cx="229" cy="169" r="2.2" fill="#FDE68A" />
+
+          <!-- Emblem Typography -->
+          <text x="220" y="232" text-anchor="middle" fill="#FFFFFF" font-family="Cinzel, serif" font-weight="700" font-size="25" letter-spacing="7">
+            SWALLOWED
+          </text>
+          <line x1="126" y1="248" x2="156" y2="248" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
+          <text x="220" y="252" text-anchor="middle" fill="#D4D4D8" font-family="JetBrains Mono, monospace" font-weight="500" font-size="11" letter-spacing="5">
+            SINCE 2024
+          </text>
+          <line x1="284" y1="248" x2="314" y2="248" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
+        </svg>
+      </div>
+
+      <!-- Subtitle Tagline -->
+      <p class="font-mono text-[11px] sm:text-xs tracking-[0.28em] uppercase text-white/60 mb-9 px-4">
+        EXCLUSIVE SYNDICATE &amp; MEMBER ROSTER
+      </p>
+
+      <!-- Primary Glassmorphic Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full max-w-lg px-4">
+        <!-- ENTER ROSTER / SWALLOWED Button -->
+        <button onclick="navigateTo('members')"
+          class="glass-pill-btn group w-full sm:w-60 py-3.5 px-6 rounded-full flex items-center justify-between text-white border-white/25">
+          <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-amber-200 group-hover:bg-white group-hover:text-black transition-colors">
+            <i class="fa-solid fa-crown text-[11px]"></i>
+          </span>
+          <span class="font-display text-xs font-bold tracking-[0.22em] uppercase">
+            ENTER ROSTER
+          </span>
+          <i class="fa-solid fa-arrow-right text-xs text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+        </button>
+
+        <!-- ADMIN LOGIN Button -->
+        <button onclick="navigateTo('admin')"
+          class="glass-pill-btn group w-full sm:w-60 py-3.5 px-6 rounded-full flex items-center justify-between text-white/90">
+          <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-white/80 group-hover:bg-white group-hover:text-black transition-colors">
+            <i id="home-admin-icon" class="fa-solid fa-shield-halved text-[11px]"></i>
+          </span>
+          <span id="home-admin-text" class="font-display text-xs font-semibold tracking-[0.22em] uppercase">
+            ADMIN LOGIN
+          </span>
+          <i class="fa-solid fa-arrow-right text-xs text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+        </button>
+      </div>
+    </section>
+
+
+    <!-- ==================== 2. MEMBERS ROSTER VIEW (PUBLIC / READ-ONLY FOR GUESTS) ==================== -->
+    <section id="view-members" class="view-section hidden w-full max-w-6xl mx-auto">
+      <!-- Header Section -->
+      <div class="text-center mb-8">
+        <div class="inline-flex items-center gap-2 mb-3">
+          <span id="roster-mode-badge" class="font-mono text-[10px] tracking-[0.22em] uppercase px-3.5 py-1 rounded-full border border-white/15 bg-white/5 text-white/70">
+            <i class="fa-solid fa-eye mr-1.5 text-[9px]"></i>VIEW ONLY MODE
+          </span>
+          <span class="font-mono text-[10px] tracking-[0.18em] uppercase px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/85">
+            TOTAL: <strong id="total-roster-badge" class="text-white">0</strong>
+          </span>
+        </div>
+
+        <h2 class="font-display text-white text-2xl sm:text-4xl font-semibold tracking-[0.34em] uppercase mb-5 pl-[0.34em]">
+          SWALLOWED ROSTER
+        </h2>
+
+        <!-- Quick Admin Add Button (ONLY VISIBLE WHEN ADMIN IS LOGGED IN) -->
+        <div id="roster-admin-quickbar" class="hidden mb-5">
+          <button onclick="openMemberModal()"
+            class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white text-black hover:bg-white/90 font-sans text-xs font-bold tracking-[0.16em] uppercase shadow-[0_0_24px_rgba(255,255,255,0.2)] transition-all">
+            <i class="fa-solid fa-user-plus text-xs"></i>
+            <span>+ ADD NEW MEMBER</span>
+          </button>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="max-w-2xl mx-auto flex flex-col sm:flex-row items-center gap-3 mb-5">
+          <!-- Live Search Input -->
+          <div class="relative w-full">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-white/40 text-xs"></i>
+            <input
+              type="text"
+              id="member-search-input"
+              oninput="renderMembers()"
+              placeholder="ค้นหาชื่อ, ตำแหน่ง, Discord หรือคำคม... (Search name, rank, handle)"
+              class="w-full glass-panel rounded-full py-2.5 pl-10 pr-10 text-xs sm:text-sm text-white placeholder-white/40 focus:outline-none focus:border-white/45 transition-all"
+            />
+            <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-xs">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <!-- Role/Title Filter Dropdown -->
+          <select id="role-tag-filter" onchange="renderMembers()"
+            class="w-full sm:w-48 glass-panel rounded-full py-2.5 px-4 text-xs font-mono text-white/85 bg-zinc-950/90 focus:outline-none focus:border-white/45 cursor-pointer">
+            <option value="ALL">ALL POSITIONS</option>
+          </select>
+        </div>
+
+        <!-- Category Filter Pill Tabs -->
+        <div class="inline-flex flex-wrap justify-center glass-panel rounded-full p-1 gap-1">
+          <button onclick="setTierFilter('ALL')" id="tab-ALL"
+            class="tier-tab px-5 py-1.5 rounded-full text-[11px] font-sans font-bold tracking-[0.18em] uppercase transition-all">
+            ALL
+          </button>
+          <button onclick="setTierFilter('LEADER')" id="tab-LEADER"
+            class="tier-tab px-5 py-1.5 rounded-full text-[11px] font-sans font-bold tracking-[0.18em] uppercase transition-all">
+            LEADERS
+          </button>
+          <button onclick="setTierFilter('ELITE')" id="tab-ELITE"
+            class="tier-tab px-5 py-1.5 rounded-full text-[11px] font-sans font-bold tracking-[0.18em] uppercase transition-all">
+            ELITE
+          </button>
+          <button onclick="setTierFilter('MEMBER')" id="tab-MEMBER"
+            class="tier-tab px-5 py-1.5 rounded-full text-[11px] font-sans font-bold tracking-[0.18em] uppercase transition-all">
+            MEMBERS
+          </button>
+        </div>
+      </div>
+
+      <!-- LEADERS Section -->
+      <div id="leaders-wrapper" class="mb-12">
+        <div class="flex items-center justify-center gap-3 mb-6">
+          <div class="h-[1px] w-12 bg-gradient-to-r from-transparent to-amber-200/40"></div>
+          <i class="fa-solid fa-crown text-amber-200 text-xs"></i>
+          <h3 class="font-display text-xs sm:text-sm font-bold tracking-[0.28em] uppercase text-amber-100">
+            LEADERS
+          </h3>
+          <span id="leaders-count" class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-amber-200/15 border border-amber-200/30 text-amber-200">0</span>
+          <div class="h-[1px] w-12 bg-gradient-to-l from-transparent to-amber-200/40"></div>
+        </div>
+
+        <div id="leaders-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Leader cards rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- MEMBERS (Includes ELITE & MEMBER tiers) Section -->
+      <div id="members-wrapper">
+        <div class="flex items-center justify-center gap-3 mb-6">
+          <div class="h-[1px] w-12 bg-gradient-to-r from-transparent to-white/25"></div>
+          <i class="fa-solid fa-shield-halved text-white/75 text-xs"></i>
+          <h3 class="font-display text-xs sm:text-sm font-bold tracking-[0.28em] uppercase text-white/90">
+            MEMBERS
+          </h3>
+          <span id="members-count" class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-white/80">0</span>
+          <div class="h-[1px] w-12 bg-gradient-to-l from-transparent to-white/25"></div>
+        </div>
+
+        <div id="members-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Member cards rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-roster-state" class="hidden glass-panel rounded-2xl p-12 text-center max-w-md mx-auto mt-6">
+        <i class="fa-solid fa-user-slash text-2xl text-white/30 mb-3"></i>
+        <p class="font-display text-xs tracking-[0.2em] uppercase text-white/80 mb-1">No Syndicate Members Found</p>
+        <p class="text-xs text-white/45">ลองเปลี่ยนคำค้นหาหรือตัวกรองระดับสมาชิกใหม่อีกครั้ง</p>
+      </div>
+    </section>
+
+
+    <!-- ==================== 3. SINGLE-ADMIN LOGIN GATE ==================== -->
+    <section id="view-admin-login" class="view-section hidden w-full max-w-sm mx-auto my-auto">
+      <div class="glass-panel rounded-3xl p-7 sm:p-8 text-center relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-[1px] bg-gradient-to-r from-transparent via-white/70 to-transparent"></div>
+
+        <!-- Lock Icon -->
+        <div class="w-14 h-14 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center mx-auto mb-5 shadow-inner">
+          <i class="fa-solid fa-lock text-white/90 text-xl"></i>
+        </div>
+
+        <h2 class="font-display text-lg font-bold tracking-[0.3em] uppercase text-white pl-[0.3em] mb-1.5">
+          ADMIN
+        </h2>
+        <p class="font-mono text-[10px] tracking-[0.2em] uppercase text-white/50 mb-6">
+          AUTHENTICATION REQUIRED
+        </p>
+
+        <!-- Discreet Credential Hint Box for Owner Testing -->
+        <div class="mb-6 rounded-xl bg-white/[0.04] border border-white/10 p-3 text-left">
+          <p class="font-mono text-[10px] text-amber-200/80 uppercase tracking-wider mb-1">
+            <i class="fa-solid fa-key mr-1"></i> Single-Admin Access Key
+          </p>
+          <p class="font-mono text-[11px] text-white/65">
+            User: <span class="text-white select-all">admin</span> &nbsp;|&nbsp; Pass: <span id="hint-pass-display" class="text-white select-all">swallowed2024</span>
+          </p>
+        </div>
+
+        <form onsubmit="handleAdminLogin(event)" class="space-y-4 text-left">
+          <div>
+            <label class="block font-mono text-[10px] tracking-[0.2em] uppercase text-white/60 mb-1.5 ml-1">
+              ADMIN USERNAME
+            </label>
+            <div class="relative">
+              <i class="fa-solid fa-user-shield absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40 text-xs"></i>
+              <input
+                type="text"
+                id="admin-username"
+                required
+                placeholder="admin"
+                class="w-full bg-black/50 border border-white/15 rounded-xl py-2.5 pl-10 pr-4 text-xs font-mono text-white placeholder-white/30 focus:outline-none focus:border-white/50 transition-colors"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-mono text-[10px] tracking-[0.2em] uppercase text-white/60 mb-1.5 ml-1">
+              PASSWORD
+            </label>
+            <div class="relative">
+              <i class="fa-solid fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40 text-xs"></i>
+              <input
+                type="password"
+                id="admin-password"
+                required
+                placeholder="••••••••••••"
+                class="w-full bg-black/50 border border-white/15 rounded-xl py-2.5 pl-10 pr-10 text-xs font-mono text-white placeholder-white/30 focus:outline-none focus:border-white/50 transition-colors"
+              />
+              <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-xs">
+                <i id="password-eye-icon" class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <p id="login-error-msg" class="hidden text-xs text-red-400 font-mono text-center pt-1">
+            Invalid Admin credentials. Access denied.
+          </p>
+
+          <button type="submit"
+            class="w-full mt-2 py-3 rounded-xl bg-white hover:bg-white/90 text-black font-sans text-xs font-bold tracking-[0.22em] uppercase transition-all flex items-center justify-center gap-2 shadow-[0_0_24px_rgba(255,255,255,0.22)]">
+            <span>UNLOCK COMMAND CENTER</span>
+            <i class="fa-solid fa-arrow-right text-[11px]"></i>
+          </button>
+        </form>
+
+        <div class="mt-6 pt-4 border-t border-white/10">
+          <p class="font-mono text-[9px] tracking-[0.24em] uppercase text-white/40">
+            SWALLOWED EXCLUSIVE CONTROL
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== 4. ADMIN ROSTER COMMAND CENTER (EXCLUSIVE TO ADMIN) ==================== -->
+    <section id="view-admin-dashboard" class="view-section hidden w-full max-w-6xl mx-auto">
+      <div class="glass-panel rounded-3xl p-6 sm:p-8">
+        <!-- Command Center Header -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-white/10">
+          <div>
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <h2 class="font-display text-base sm:text-xl font-bold tracking-[0.22em] uppercase text-white">
+                SWALLOWED COMMAND CENTER
+              </h2>
+            </div>
+            <p class="text-xs text-white/55 mt-1">
+              สิทธิ์ผู้ดูแลระบบสูงสุด: คุณสามารถสร้าง แก้ไข ย้ายระดับ และลบรายชื่อสมาชิกทั้งหมดได้จากหน้านี้
+            </p>
+          </div>
+
+          <!-- Admin Action Toolbar -->
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="openMemberModal()"
+              class="px-4 py-2.5 rounded-full bg-white text-black hover:bg-white/90 font-sans text-[11px] font-bold tracking-[0.15em] uppercase flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all">
+              <i class="fa-solid fa-plus text-xs"></i>
+              <span>ADD MEMBER</span>
+            </button>
+
+            <button onclick="openChangePasswordModal()"
+              class="px-3.5 py-2.5 rounded-full glass-pill-btn text-white/85 hover:text-white font-mono text-[10px] tracking-[0.12em] uppercase flex items-center gap-1.5"
+              title="Change Admin Password">
+              <i class="fa-solid fa-key text-[10px]"></i>
+              <span>PASSWORD</span>
+            </button>
+
+            <button onclick="exportRosterJSON()"
+              class="px-3.5 py-2.5 rounded-full glass-pill-btn text-white/85 hover:text-white font-mono text-[10px] tracking-[0.12em] uppercase flex items-center gap-1.5"
+              title="Export Roster JSON">
+              <i class="fa-solid fa-download text-[10px]"></i>
+              <span>EXPORT</span>
+            </button>
+
+            <label class="px-3.5 py-2.5 rounded-full glass-pill-btn text-white/85 hover:text-white font-mono text-[10px] tracking-[0.12em] uppercase flex items-center gap-1.5 cursor-pointer"
+              title="Import Roster JSON">
+              <i class="fa-solid fa-upload text-[10px]"></i>
+              <span>IMPORT</span>
+              <input type="file" accept=".json" onchange="importRosterJSON(event)" class="hidden" />
+            </label>
+
+            <button onclick="openConfirmModal('RESET_DEFAULT')"
+              class="px-3 py-2.5 rounded-full glass-pill-btn text-white/65 hover:text-white font-mono text-[10px]"
+              title="Reset Default Roster">
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+
+            <button onclick="handleAdminLogout()"
+              class="px-4 py-2.5 rounded-full bg-red-500/20 hover:bg-red-500/35 border border-red-400/30 text-red-200 font-sans text-[11px] font-bold tracking-[0.15em] uppercase transition-all">
+              LOGOUT
+            </button>
+          </div>
+        </div>
+
+        <!-- Roster Metrics -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 my-6">
+          <div class="bg-black/40 border border-white/10 rounded-2xl p-4">
+            <p class="font-mono text-[10px] tracking-[0.18em] uppercase text-white/45">TOTAL SYNDICATE</p>
+            <p id="stat-total" class="font-display text-2xl font-bold text-white mt-1">0</p>
+          </div>
+          <div class="bg-black/40 border border-amber-200/20 rounded-2xl p-4">
+            <p class="font-mono text-[10px] tracking-[0.18em] uppercase text-amber-200/70">LEADERS</p>
+            <p id="stat-leaders" class="font-display text-2xl font-bold text-amber-200 mt-1">0</p>
+          </div>
+          <div class="bg-black/40 border border-white/10 rounded-2xl p-4">
+            <p class="font-mono text-[10px] tracking-[0.18em] uppercase text-white/45">ELITE TIER</p>
+            <p id="stat-elite" class="font-display text-2xl font-bold text-white mt-1">0</p>
+          </div>
+          <div class="bg-black/40 border border-white/10 rounded-2xl p-4">
+            <p class="font-mono text-[10px] tracking-[0.18em] uppercase text-white/45">MEMBERS</p>
+            <p id="stat-members" class="font-display text-2xl font-bold text-white mt-1">0</p>
+          </div>
+        </div>
+
+        <!-- Admin Management Table -->
+        <div class="overflow-x-auto rounded-2xl border border-white/10 bg-black/30">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-white/10 font-mono text-[10px] tracking-[0.18em] uppercase text-white/50 bg-white/[0.02]">
+                <th class="py-3.5 px-4">MEMBER</th>
+                <th class="py-3.5 px-3">TIER</th>
+                <th class="py-3.5 px-3">POSITION / TAG</th>
+                <th class="py-3.5 px-3 hidden md:table-cell">DISCORD / HANDLE</th>
+                <th class="py-3.5 px-3 hidden lg:table-cell">JOINED</th>
+                <th class="py-3.5 px-4 text-right">ADMIN CONTROLS</th>
+              </tr>
+            </thead>
+            <tbody id="admin-roster-tbody" class="divide-y divide-white/5 text-xs">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Subtle Centered Footer -->
+  <footer class="w-full text-center py-4 px-4 pointer-events-none">
+    <p class="font-mono text-[10px] tracking-[0.26em] uppercase text-white/40">
+      © 2026 SWALLOWED SYNDICATE. ALL RIGHTS RESERVED.
+    </p>
+  </footer>
+
+
+  <!-- ==================== FLOATING AMBIENT MUSIC WIDGET (Bottom-Right) ==================== -->
+  <div id="music-widget" class="fixed bottom-4 right-4 z-40 glass-panel rounded-2xl p-2.5 flex items-center gap-3 max-w-[280px] sm:max-w-[305px] transition-all duration-300">
+    <!-- Vinyl / Disc Art Thumbnail -->
+    <div class="relative w-11 h-11 rounded-xl overflow-hidden bg-zinc-950 border border-white/15 flex-shrink-0 flex items-center justify-center">
+      <svg class="w-full h-full" viewBox="0 0 60 60">
+        <defs>
+          <linearGradient id="swallowedDisc" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#27272a" />
+            <stop offset="100%" stop-color="#050507" />
+          </linearGradient>
+        </defs>
+        <rect width="60" height="60" fill="url(#swallowedDisc)" />
+        <circle cx="30" cy="30" r="19" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5" />
+        <circle cx="30" cy="30" r="6" fill="rgba(253,230,138,0.8)" />
+      </svg>
+      <!-- Animated Equalizer Overlay -->
+      <div id="eq-bars" class="absolute inset-0 bg-black/60 flex items-end justify-center gap-1 pb-2.5 opacity-0 transition-opacity">
+        <span class="w-1 bg-amber-200 rounded-full eq-1" style="height: 6px;"></span>
+        <span class="w-1 bg-amber-200 rounded-full eq-2" style="height: 11px;"></span>
+        <span class="w-1 bg-amber-200 rounded-full eq-3" style="height: 8px;"></span>
+      </div>
+    </div>
+
+    <!-- Track Info -->
+    <div class="min-w-0 flex-grow">
+      <p id="track-title" class="text-[11px] font-semibold text-white truncate">Obsidian Nocturne</p>
+      <p id="track-artist" class="text-[10px] font-mono text-white/45 truncate">Swallowed Lounge</p>
+      <div class="flex items-center gap-1.5 mt-1">
+        <i class="fa-solid fa-volume-low text-[9px] text-white/40"></i>
+        <input type="range" id="ambient-volume" min="0" max="1" step="0.05" value="0.35"
+          oninput="updateAmbientVolume(this.value)"
+          class="w-16 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-white" />
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="flex items-center gap-1 flex-shrink-0">
+      <button onclick="toggleAmbientAudio()" id="play-pause-btn"
+        class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/25 border border-white/15 flex items-center justify-center text-white text-xs transition-all"
+        title="Play / Pause Ambient Lounge Audio">
+        <i id="play-pause-icon" class="fa-solid fa-play ml-0.5"></i>
+      </button>
+      <button onclick="nextAmbientTrack()"
+        class="w-7 h-7 rounded-full hover:bg-white/10 flex items-center justify-center text-white/60 hover:text-white text-[11px] transition-all"
+        title="Next Track">
+        <i class="fa-solid fa-forward-step"></i>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ==================== MEMBER DETAIL MODAL (Public + Admin Quick Controls) ==================== -->
+  <div id="profile-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="glass-panel rounded-3xl max-w-md w-full p-6 sm:p-7 text-center relative animate-[fadeSlideUp_0.25s_ease]">
+      <button onclick="closeProfileModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white flex items-center justify-center text-xs">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Large Member Avatar -->
+      <div id="modal-avatar" class="w-24 h-24 rounded-2xl mx-auto mb-4 border border-white/25 overflow-hidden shadow-2xl bg-zinc-900"></div>
+
+      <!-- Rank/Tier Badge -->
+      <span id="modal-tier-badge" class="inline-block font-mono text-[10px] font-semibold tracking-[0.22em] uppercase px-3.5 py-1 rounded-full mb-2"></span>
+
+      <!-- Full Name & Position -->
+      <h3 id="modal-name" class="font-display text-xl font-bold text-white tracking-wider"></h3>
+      <p id="modal-position" class="font-mono text-[11px] tracking-[0.2em] uppercase text-white/55 mt-1"></p>
+
+      <!-- Quote / Bio -->
+      <blockquote id="modal-bio" class="font-serif italic text-sm sm:text-base text-white/80 my-4 px-3 py-2.5 rounded-xl bg-white/[0.03] border border-white/5"></blockquote>
+
+      <!-- Metadata Box -->
+      <div class="bg-black/45 border border-white/10 rounded-2xl p-4 mb-5 text-xs space-y-2.5">
+        <div class="flex justify-between items-center border-b border-white/5 pb-2">
+          <span class="font-mono text-[10px] text-white/45 uppercase">SYNDICATE</span>
+          <span class="font-display font-semibold text-white tracking-wider">SWALLOWED</span>
+        </div>
+        <div class="flex justify-between items-center border-b border-white/5 pb-2">
+          <span class="font-mono text-[10px] text-white/45 uppercase">DISCORD / IGN</span>
+          <span id="modal-handle" class="text-white font-mono"></span>
+        </div>
+        <div class="flex justify-between items-center border-b border-white/5 pb-2">
+          <span class="font-mono text-[10px] text-white/45 uppercase">JOINED DATE</span>
+          <span id="modal-joined" class="text-white/80 font-mono"></span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="font-mono text-[10px] text-white/45 uppercase">STATUS</span>
+          <span class="text-emerald-400 font-mono text-[11px] flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ACTIVE
+          </span>
+        </div>
+      </div>
+
+      <!-- Social Link Button -->
+      <a id="modal-social-link" href="#" target="_blank" rel="noopener noreferrer"
+        class="w-full py-2.5 rounded-full bg-white text-black hover:bg-white/90 font-sans text-[11px] font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-2 transition-all">
+        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+        <span>OPEN SOCIAL PROFILE</span>
+      </a>
+
+      <!-- Admin-Only Edit/Delete Footer inside Modal -->
+      <div id="modal-admin-actions" class="hidden grid-cols-2 gap-2.5 mt-3 pt-3 border-t border-white/10">
+        <button id="modal-edit-btn" type="button"
+          class="py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-[10px] tracking-[0.15em] uppercase flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-pen"></i> EDIT MEMBER
+        </button>
+        <button id="modal-delete-btn" type="button"
+          class="py-2 rounded-xl bg-red-500/20 hover:bg-red-500/35 border border-red-400/30 text-red-200 font-mono text-[10px] tracking-[0.15em] uppercase flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-trash"></i> DELETE
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== ADD / EDIT MEMBER MODAL (ADMIN ONLY) ==================== -->
+  <div id="edit-member-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
+    <div class="glass-panel rounded-3xl max-w-lg w-full p-6 sm:p-7 relative my-auto">
+      <button onclick="closeMemberModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white flex items-center justify-center text-xs">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-2 mb-5">
+        <i class="fa-solid fa-user-pen text-amber-200 text-sm"></i>
+        <h3 id="edit-modal-title" class="font-display text-sm sm:text-base font-bold tracking-[0.22em] uppercase text-white">
+          ADD SWALLOWED MEMBER
+        </h3>
+      </div>
+
+      <form onsubmit="saveMemberForm(event)" class="space-y-4">
+        <input type="hidden" id="edit-member-id" />
+
+        <!-- Avatar Preview + Upload + Presets -->
+        <div class="bg-black/40 border border-white/10 rounded-2xl p-3.5">
+          <div class="flex items-center gap-4">
+            <div id="form-avatar-preview" class="w-16 h-16 rounded-xl overflow-hidden border border-white/20 bg-zinc-900 flex-shrink-0"></div>
+            <div class="flex-grow space-y-2">
+              <div class="flex flex-wrap gap-2">
+                <label class="px-3 py-1.5 rounded-lg bg-white text-black hover:bg-white/90 font-mono text-[10px] font-bold uppercase cursor-pointer transition-colors">
+                  <i class="fa-solid fa-image mr-1"></i> UPLOAD PHOTO
+                  <input type="file" accept="image/*" onchange="handleAvatarFileUpload(event)" class="hidden" />
+                </label>
+                <button type="button" onclick="clearAvatarImage()" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 font-mono text-[10px] text-white/75 uppercase">
+                  USE MONOGRAM
+                </button>
+              </div>
+              <input type="text" id="edit-member-avatar" oninput="updateFormAvatarPreview()"
+                placeholder="Or paste image URL (https://...)"
+                class="w-full bg-black/50 border border-white/15 rounded-lg py-1.5 px-2.5 text-[11px] font-mono text-white placeholder-white/30 focus:outline-none focus:border-white/50" />
+            </div>
+          </div>
+
+          <!-- Preset Dark Luxury Portraits -->
+          <div class="mt-3 pt-2.5 border-t border-white/10">
+            <p class="font-mono text-[9px] tracking-[0.18em] uppercase text-white/45 mb-2">QUICK DARK PORTRAIT PRESETS:</p>
+            <div id="avatar-presets-list" class="flex items-center gap-2 overflow-x-auto pb-1">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Name & Tier -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-mono text-[10px] tracking-[0.18em] uppercase text-white/60 mb-1">MEMBER NAME *</label>
+            <input type="text" id="edit-member-name" required oninput="updateFormAvatarPreview()" placeholder="e.g. Kaelen Swallowed"
+              class="w-full bg-black/50 border border-white/15 rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none focus:border-white/50" />
+          </div>
+          <div>
+            <label class="block font-mono text-[10px] tracking-[0.18em] uppercase text-white/60 mb-1">RANK TIER *</label>
+            <select id="edit-member-tier"
+              class="w-full bg-zinc-900 border border-white/15 rounded-xl py-2.5 px-3 text-xs font-mono text-white focus:outline-none focus:border-white/50">
+              <option value="LEADER">LEADER (หัวหน้าแก๊ง)</option>
+              <option value="ELITE">ELITE (ระดับสูง)</option>
+              <option value="MEMBER">MEMBER (สมาชิก)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Position/Title & Discord/Handle -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-mono text-[10px] tracking-[0.18em] uppercase text-white/60 mb-1">POSITION / TAG</label>
+            <input type="text" id="edit-member-position" placeholder="e.g. Founder, Underboss, Enforcer"
+              class="w-full bg-black/50 border border-white/15 rounded-xl py-2.5 px-3.5 text-xs text-white focus:outline-none focus:border-white/50" />
+          </div>
+          <div>
+            <label class="block font-mono text-[10px] tracking-[0.18em] uppercase text-white/60 mb-1">DISCORD / IGN HANDLE</label>
+            <input type="text" id="edit-member-handle" placeholder="e.g. kaelen#0001"
+              class="w-full bg-black/50 border border-white/15 rounded-xl py-2.5 px-3.5 text-xs font-mono text-white focus:outline-none focus:border-white/50" />
+          </div>
+        </div>
+
+        <!-- Join Date & Social URL -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-mono text-[10px] tracking-[0.18em] uppercase text-white/60 mb-1">JOIN DATE</label>
+            <input type="date" id="edit-member-joined"
+              class="w-full bg-black/50 border border-white/15 rounded-xl py-2.5 px-3.5 text-xs font-mono text-white focus:outline-none focus:border-white/50" />
+          </div>
+          <div>
+            <label class="block font-mono text-[10px] tracking-[0.18em] uppercase text-white/60 mb-1">SOCIAL / FACEBOOK URL</label>
+            <input type="url" id="edit-member-social" placeholder="https://facebook.com/username"
+              class="w-full bg-black/50 border border-white/15 rounded-xl py-2.5 px-3.5 text-xs font-mono text-white focus:outline-none focus:border-white/50" />
+          </div>
+        </div>
+
+        <!-- Bio / Quote -->
+        <div>
+          <label class="block font-mono text-[10px] tracking-[0.18em] uppercase text-white/60 mb-1">BIO / MOTTO QUOTE</label>
+          <textarea id="edit-member-bio" rows="2" placeholder="คำคมประจำตัว หรือประวัติย่อของสมาชิก..."
+            class="w-full bg-black/50 border border-white/15 rounded-xl py-2 px-3.5 text-xs text-white focus:outline-none focus:border-white/50 resize-none"></textarea>
+        </div>
+
+        <div class="pt-2 flex gap-2.5">
+          <button type="button" onclick="closeMemberModal()"
+            class="flex-1 py-2.5 rounded-xl border border-white/15 text-white/70 hover:text-white font-sans text-xs font-semibold tracking-[0.16em] uppercase">
+            CANCEL
+          </button>
+          <button type="submit"
+            class="flex-1 py-2.5 rounded-xl bg-white text-black hover:bg-white/90 font-sans text-xs font-bold tracking-[0.16em] uppercase shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+            SAVE TO ROSTER
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ==================== CHANGE ADMIN PASSWORD MODAL ==================== -->
+  <div id="change-pass-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="glass-panel rounded-3xl max-w-sm w-full p-6 relative">
+      <button onclick="closeChangePasswordModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white flex items-center justify-center text-xs">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <h3 class="font-display text-sm font-bold tracking-[0.22em] uppercase text-white mb-2">
+        CHANGE ADMIN PASSWORD
+      </h3>
+      <p class="text-xs text-white/50 mb-5">ตั้งรหัสผ่านใหม่สำหรับผู้ดูแลระบบ SWALLOWED</p>
+
+      <form onsubmit="saveNewAdminPassword(event)" class="space-y-4">
+        <div>
+          <label class="block font-mono text-[10px] tracking-[0.18em] uppercase text-white/60 mb-1">NEW PASSWORD (MIN 4 CHARS)</label>
+          <input type="text" id="new-admin-pass-input" required minlength="4" placeholder="Enter new password..."
+            class="w-full bg-black/50 border border-white/15 rounded-xl py-2.5 px-3.5 text-xs font-mono text-white focus:outline-none focus:border-white/50" />
+        </div>
+        <button type="submit"
+          class="w-full py-2.5 rounded-xl bg-white text-black hover:bg-white/90 font-sans text-xs font-bold tracking-[0.18em] uppercase">
+          UPDATE PASSWORD
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ==================== CUSTOM CONFIRMATION MODAL (No browser confirm()) ==================== -->
+  <div id="confirm-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="glass-panel rounded-3xl max-w-sm w-full p-6 text-center">
+      <div class="w-12 h-12 rounded-2xl bg-red-500/15 border border-red-400/30 text-red-300 flex items-center justify-center mx-auto mb-4">
+        <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+      </div>
+      <h3 id="confirm-modal-title" class="font-display text-sm font-bold tracking-[0.2em] uppercase text-white mb-2">
+        CONFIRM ACTION
+      </h3>
+      <p id="confirm-modal-desc" class="text-xs text-white/60 mb-6"></p>
+      <div class="flex gap-2.5">
+        <button onclick="closeConfirmModal()"
+          class="flex-1 py-2.5 rounded-xl border border-white/15 text-white/75 hover:text-white font-sans text-xs font-semibold uppercase">
+          CANCEL
+        </button>
+        <button id="confirm-modal-yes-btn"
+          class="flex-1 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white font-sans text-xs font-bold uppercase">
+          CONFIRM
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div id="toast" class="fixed top-20 right-4 z-50 pointer-events-none opacity-0 translate-y-2 transition-all duration-300">
+    <div class="glass-panel rounded-full px-4 py-2.5 flex items-center gap-2.5 shadow-2xl border-white/20">
+      <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-xs"></i>
+      <span id="toast-msg" class="font-mono text-[11px] tracking-[0.1em] text-white"></span>
+    </div>
+  </div>
+
+
+  <!-- ==================== JAVASCRIPT APPLICATION LOGIC ==================== -->
+  <script>
+    // Storage Keys
+    const ROSTER_STORAGE_KEY = 'swallowed_roster_v1';
+    const ADMIN_AUTH_KEY = 'swallowed_admin_session_v1';
+    const ADMIN_PASS_KEY = 'swallowed_admin_pass_v1';
+    const ADMIN_USERNAME = 'admin';
+
+    // Curated Dark Monochrome Portrait Presets
+    const AVATAR_PRESETS = [
+      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=240&q=80',
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&q=80',
+      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=240&q=80',
+      'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=240&q=80',
+      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=240&q=80',
+      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=240&q=80'
+    ];
+
+    // Initial Seeded SWALLOWED Syndicate Roster (3 Leaders, 2 Elite, 4 Members)
+    const DEFAULT_MEMBERS = [
+      {
+        id: 'sw-1',
+        name: 'Lucian Swallowed',
+        tier: 'LEADER',
+        position: 'FOUNDER',
+        handle: 'lucian#0001',
+        joined: '2024-01-14',
+        social: 'https://facebook.com',
+        avatar: AVATAR_PRESETS[2],
+        bio: 'Silence speaks louder than threats. Everything falls into the abyss.'
+      },
+      {
+        id: 'sw-2',
+        name: 'Vespera Swallowed',
+        tier: 'LEADER',
+        position: 'UNDERBOSS',
+        handle: 'vespera#0002',
+        joined: '2024-01-18',
+        social: 'https://facebook.com',
+        avatar: AVATAR_PRESETS[0],
+        bio: 'Precision in every move. Loyalty above all else.'
+      },
+      {
+        id: 'sw-3',
+        name: 'Kaelen Swallowed',
+        tier: 'LEADER',
+        position: 'CONSIGLIERE',
+        handle: 'kaelen#0003',
+        joined: '2024-02-02',
+        social: 'https://facebook.com',
+        avatar: AVATAR_PRESETS[1],
+        bio: 'We do not negotiate with shadows; we own them.'
+      },
+      {
+        id: 'sw-4',
+        name: 'Dante Swallowed',
+        tier: 'ELITE',
+        position: 'VANGUARD',
+        handle: 'dante.sw#1042',
+        joined: '2024-03-11',
+        social: 'https://facebook.com',
+        avatar: AVATAR_PRESETS[4],
+        bio: 'First into the storm, last to leave the table.'
+      },
+      {
+        id: 'sw-5',
+        name: 'Soren Swallowed',
+        tier: 'ELITE',
+        position: 'TACTICIAN',
+        handle: 'soren.sw#7721',
+        joined: '2024-04-05',
+        social: 'https://facebook.com',
+        avatar: AVATAR_PRESETS[3],
+        bio: 'Every outcome is calculated before the first shot.'
+      },
+      {
+        id: 'sw-6',
+        name: 'Nyx Swallowed',
+        tier: 'MEMBER',
+        position: 'ENFORCER',
+        handle: 'nyx.sw#3310',
+        joined: '2024-05-19',
+        social: 'https://facebook.com',
+        avatar: '',
+        bio: 'Swallowed by the night, reborn in obsidian.'
+      },
+      {
+        id: 'sw-7',
+        name: 'Zane Swallowed',
+        tier: 'MEMBER',
+        position: 'OPERATIVE',
+        handle: 'zane.sw#8894',
+        joined: '2024-06-22',
+        social: 'https://facebook.com',
+        avatar: '',
+        bio: 'No hesitation. No trace left behind.'
+      },
+      {
+        id: 'sw-8',
+        name: 'Riven Swallowed',
+        tier: 'MEMBER',
+        position: 'SHADOW',
+        handle: 'riven.sw#5120',
+        joined: '2024-08-09',
+        social: 'https://facebook.com',
+        avatar: AVATAR_PRESETS[5],
+        bio: 'Watching from the velvet dark.'
+      },
+      {
+        id: 'sw-9',
+        name: 'Orion Swallowed',
+        tier: 'MEMBER',
+        position: 'OPERATIVE',
+        handle: 'orion.sw#9901',
+        joined: '2024-10-14',
+        social: 'https://facebook.com',
+        avatar: '',
+        bio: 'Bound by blood and silver.'
+      }
+    ];
+
+    // Application State
+    let members = [];
+    let currentView = 'home';
+    let currentTierFilter = 'ALL';
+    let isAdminLoggedIn = false;
+    let adminPassword = 'swallowed2024';
+
+    // Initialize Storage
+    function initStorage() {
+      try {
+        const savedPass = localStorage.getItem(ADMIN_PASS_KEY);
+        if (savedPass) adminPassword = savedPass;
+
+        const savedRoster = localStorage.getItem(ROSTER_STORAGE_KEY);
+        members = savedRoster ? JSON.parse(savedRoster) : [...DEFAULT_MEMBERS];
+        if (!savedRoster) saveRoster();
+
+        isAdminLoggedIn = sessionStorage.getItem(ADMIN_AUTH_KEY) === 'true' || localStorage.getItem(ADMIN_AUTH_KEY) === 'true';
+      } catch (e) {
+        members = [...DEFAULT_MEMBERS];
+      }
+      document.getElementById('hint-pass-display').textContent = adminPassword;
+    }
+
+    function saveRoster() {
+      try {
+        localStorage.setItem(ROSTER_STORAGE_KEY, JSON.stringify(members));
+      } catch (e) {
+        showToast('Storage warning: image size may be too large', true);
+      }
+    }
+
+    // Generate Avatar Markup (Photo with fallback to custom silver/gold SVG monogram)
+    function getAvatarHTML(member, sizeClass = 'w-full h-full') {
+      const name = member.name || 'SW';
+      const initials = name
+        .split(' ')
+        .map(p => p[0])
+        .join('')
+        .substring(0, 2)
+        .toUpperCase();
+
+      const isLeader = member.tier === 'LEADER';
+      const crownSVG = isLeader
+        ? `<path d="M18 11 L21 15 L24 10 L27 15 L30 11 L29 17 H19 Z" fill="#FDE68A" />`
+        : '';
+
+      const fallbackSVG = `
+        <svg viewBox="0 0 48 48" class="${sizeClass}" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="swGrad-${initials}-${isLeader ? 'L' : 'M'}" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="${isLeader ? '#3b3322' : '#27272a'}" />
+              <stop offset="100%" stop-color="#050507" />
+            </linearGradient>
+          </defs>
+          <rect width="48" height="48" fill="url(#swGrad-${initials}-${isLeader ? 'L' : 'M'})" />
+          <circle cx="24" cy="21" r="7" fill="rgba(255,255,255,0.1)" />
+          <path d="M10 46 C10 35, 38 35, 38 46" fill="rgba(255,255,255,0.08)" />
+          ${crownSVG}
+          <text x="24" y="30" text-anchor="middle" fill="${isLeader ? '#FDE68A' : 'rgba(255,255,255,0.9)'}" font-family="Cinzel, serif" font-weight="700" font-size="13" letter-spacing="1">
+            ${initials}
+          </text>
+        </svg>
+      `;
+
+      if (member.avatar && member.avatar.trim() !== '') {
+        return `
+          <img src="${escapeHTML(member.avatar)}" alt="${escapeHTML(name)}"
+            class="${sizeClass} object-cover grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <div style="display:none;" class="${sizeClass}">${fallbackSVG}</div>
+        `;
+      }
+      return fallbackSVG;
+    }
+
+    // Navigation Controller
+    function navigateTo(view) {
+      currentView = view;
+
+      document.getElementById('view-home').classList.add('hidden');
+      document.getElementById('view-members').classList.add('hidden');
+      document.getElementById('view-admin-login').classList.add('hidden');
+      document.getElementById('view-admin-dashboard').classList.add('hidden');
+
+      const bgScene = document.getElementById('bg-scene');
+      if (view === 'home') {
+        bgScene.classList.remove('blurred');
+      } else {
+        bgScene.classList.add('blurred');
+      }
+
+      document.querySelectorAll('.nav-pill').forEach(btn => {
+        btn.classList.remove('bg-white', 'text-black', 'shadow-md');
+        btn.classList.add('text-white/75');
+      });
+
+      if (view === 'home') {
+        document.getElementById('view-home').classList.remove('hidden');
+        setActiveNav('nav-home');
+      } else if (view === 'members') {
+        document.getElementById('view-members').classList.remove('hidden');
+        setActiveNav('nav-members');
+        populatePositionFilter();
+        setTierFilter(currentTierFilter);
+      } else if (view === 'admin') {
+        setActiveNav('nav-admin');
+        if (isAdminLoggedIn) {
+          document.getElementById('view-admin-dashboard').classList.remove('hidden');
+          renderAdminDashboard();
+        } else {
+          document.getElementById('login-error-msg').classList.add('hidden');
+          document.getElementById('view-admin-login').classList.remove('hidden');
+        }
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setActiveNav(id) {
+      const btn = document.getElementById(id);
+      if (btn) {
+        btn.classList.remove('text-white/75');
+        btn.classList.add('bg-white', 'text-black', 'shadow-md');
+      }
+    }
+
+    // Populate unique positions into Roster Filter Dropdown
+    function populatePositionFilter() {
+      const select = document.getElementById('role-tag-filter');
+      const currentVal = select.value;
+      const positions = [...new Set(members.map(m => (m.position || '').trim().toUpperCase()).filter(Boolean))];
+
+      select.innerHTML = `<option value="ALL">ALL POSITIONS</option>` +
+        positions.map(pos => `<option value="${escapeHTML(pos)}">${escapeHTML(pos)}</option>`).join('');
+
+      if (positions.includes(currentVal)) {
+        select.value = currentVal;
+      }
+    }
+
+    function setTierFilter(tier) {
+      currentTierFilter = tier;
+      document.querySelectorAll('.tier-tab').forEach(tab => {
+        tab.classList.remove('bg-white', 'text-black');
+        tab.classList.add('text-white/65', 'hover:text-white');
+      });
+
+      const activeTab = document.getElementById(`tab-${tier}`);
+      if (activeTab) {
+        activeTab.classList.remove('text-white/65', 'hover:text-white');
+        activeTab.classList.add('bg-white', 'text-black');
+      }
+
+      renderMembers();
+    }
+
+    function clearSearch() {
+      document.getElementById('member-search-input').value = '';
+      renderMembers();
+    }
+
+    // Render Public / Admin-Aware Members Roster
+    function renderMembers() {
+      const query = document.getElementById('member-search-input').value.trim().toLowerCase();
+      const posFilter = document.getElementById('role-tag-filter').value;
+      document.getElementById('clear-search-btn').classList.toggle('hidden', query.length === 0);
+
+      // Update Mode Pill & Admin Quick Add Bar
+      const modeBadge = document.getElementById('roster-mode-badge');
+      const quickBar = document.getElementById('roster-admin-quickbar');
+      if (isAdminLoggedIn) {
+        modeBadge.innerHTML = `<i class="fa-solid fa-shield-halved mr-1.5 text-emerald-400"></i>ADMIN EDIT MODE ACTIVE`;
+        modeBadge.className = 'font-mono text-[10px] tracking-[0.2em] uppercase px-3.5 py-1 rounded-full border border-emerald-400/35 bg-emerald-500/10 text-emerald-300';
+        quickBar.classList.remove('hidden');
+      } else {
+        modeBadge.innerHTML = `<i class="fa-solid fa-eye mr-1.5 text-[9px]"></i>VIEW ONLY MODE`;
+        modeBadge.className = 'font-mono text-[10px] tracking-[0.2em] uppercase px-3.5 py-1 rounded-full border border-white/15 bg-white/5 text-white/70';
+        quickBar.classList.add('hidden');
+      }
+
+      document.getElementById('total-roster-badge').textContent = members.length;
+
+      const filtered = members.filter(m => {
+        const matchesTier = currentTierFilter === 'ALL' || m.tier === currentTierFilter;
+        const matchesPos = posFilter === 'ALL' || (m.position || '').toUpperCase() === posFilter;
+        const matchesQuery =
+          m.name.toLowerCase().includes(query) ||
+          (m.position || '').toLowerCase().includes(query) ||
+          (m.handle || '').toLowerCase().includes(query) ||
+          (m.bio || '').toLowerCase().includes(query) ||
+          m.tier.toLowerCase().includes(query);
+        return matchesTier && matchesPos && matchesQuery;
+      });
+
+      const leaders = filtered.filter(m => m.tier === 'LEADER');
+      const regularAndElite = filtered.filter(m => m.tier !== 'LEADER');
+
+      document.getElementById('leaders-count').textContent = leaders.length;
+      document.getElementById('members-count').textContent = regularAndElite.length;
+
+      document.getElementById('leaders-wrapper').classList.toggle('hidden', leaders.length === 0);
+      document.getElementById('members-wrapper').classList.toggle('hidden', regularAndElite.length === 0);
+      document.getElementById('empty-roster-state').classList.toggle('hidden', filtered.length > 0);
+
+      document.getElementById('leaders-grid').innerHTML = leaders.map(createMemberCardHTML).join('');
+      document.getElementById('members-grid').innerHTML = regularAndElite.map(createMemberCardHTML).join('');
+    }
+
+    function createMemberCardHTML(member) {
+      const isLeader = member.tier === 'LEADER';
+      const isElite = member.tier === 'ELITE';
+
+      const cardClass = isLeader ? 'glass-card glass-card-leader' : 'glass-card';
+      const avatarBorder = isLeader ? 'border-amber-200/45' : isElite ? 'border-white/30' : 'border-white/15';
+
+      const tierBadge = isLeader
+        ? `<span class="font-mono text-[9px] font-semibold tracking-[0.18em] uppercase px-2 py-0.5 rounded bg-amber-200/15 text-amber-200 border border-amber-200/30"><i class="fa-solid fa-crown mr-1 text-[8px]"></i>LEADER</span>`
+        : isElite
+          ? `<span class="font-mono text-[9px] font-semibold tracking-[0.18em] uppercase px-2 py-0.5 rounded bg-white/15 text-white border border-white/25">ELITE</span>`
+          : `<span class="font-mono text-[9px] tracking-[0.18em] uppercase px-2 py-0.5 rounded bg-white/5 text-white/55 border border-white/10">MEMBER</span>`;
+
+      // Admin inline quick buttons ONLY rendered if Admin is authenticated
+      const adminCardControls = isAdminLoggedIn
+        ? `
+          <div class="flex items-center gap-1" onclick="event.stopPropagation()">
+            <button onclick="openMemberModal('${member.id}')" title="Edit Member"
+              class="w-7 h-7 rounded-full bg-white/10 hover:bg-white text-white/80 hover:text-black flex items-center justify-center transition-colors">
+              <i class="fa-solid fa-pen text-[10px]"></i>
+            </button>
+            <button onclick="promptDeleteMember('${member.id}')" title="Delete Member"
+              class="w-7 h-7 rounded-full bg-red-500/15 hover:bg-red-500 text-red-300 hover:text-white flex items-center justify-center transition-colors">
+              <i class="fa-solid fa-trash text-[10px]"></i>
+            </button>
+          </div>
+        `
+        : `
+          <div class="w-8 h-8 rounded-full bg-white/5 group-hover:bg-white/15 border border-white/15 flex items-center justify-center text-white/60 group-hover:text-white flex-shrink-0 transition-all">
+            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          </div>
+        `;
+
+      return `
+        <div onclick="openProfileModal('${member.id}')" class="${cardClass} p-3.5 flex items-center justify-between gap-3 cursor-pointer group">
+          <div class="flex items-center gap-3.5 min-w-0">
+            <!-- Avatar -->
+            <div class="w-14 h-14 rounded-xl overflow-hidden border ${avatarBorder} flex-shrink-0 bg-zinc-950 shadow-md">
+              ${getAvatarHTML(member)}
+            </div>
+
+            <!-- Member Info -->
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5 flex-wrap mb-1">
+                ${tierBadge}
+                ${member.position ? `<span class="font-mono text-[9px] tracking-[0.14em] uppercase text-white/50 truncate">${escapeHTML(member.position)}</span>` : ''}
+              </div>
+              <h4 class="text-sm font-bold text-white truncate group-hover:text-amber-100 transition-colors">
+                ${escapeHTML(member.name)}
+              </h4>
+              <p class="font-mono text-[10px] text-white/40 truncate mt-0.5">
+                ${escapeHTML(member.handle || '@swallowed')}
+              </p>
+            </div>
+          </div>
+
+          ${adminCardControls}
+        </div>
+      `;
+    }
+
+    // Member Detail Modal
+    function openProfileModal(id) {
+      const member = members.find(m => m.id === id);
+      if (!member) return;
+
+      document.getElementById('modal-avatar').innerHTML = getAvatarHTML(member);
+
+      const badge = document.getElementById('modal-tier-badge');
+      if (member.tier === 'LEADER') {
+        badge.innerHTML = `<i class="fa-solid fa-crown mr-1.5"></i>LEADER`;
+        badge.className = 'inline-block font-mono text-[10px] font-bold tracking-[0.22em] uppercase px-3.5 py-1 rounded-full bg-amber-200/15 text-amber-200 border border-amber-200/35 mb-2';
+      } else if (member.tier === 'ELITE') {
+        badge.textContent = 'ELITE DIVISION';
+        badge.className = 'inline-block font-mono text-[10px] font-bold tracking-[0.22em] uppercase px-3.5 py-1 rounded-full bg-white/15 text-white border border-white/25 mb-2';
+      } else {
+        badge.textContent = 'SYNDICATE MEMBER';
+        badge.className = 'inline-block font-mono text-[10px] font-semibold tracking-[0.22em] uppercase px-3.5 py-1 rounded-full bg-white/10 text-white/75 border border-white/15 mb-2';
+      }
+
+      document.getElementById('modal-name').textContent = member.name;
+      document.getElementById('modal-position').textContent = member.position || 'OPERATIVE';
+      document.getElementById('modal-bio').textContent = member.bio ? `"${member.bio}"` : '"Bound by the shadows of Swallowed."';
+      document.getElementById('modal-handle').textContent = member.handle || '-';
+      document.getElementById('modal-joined').textContent = member.joined || '2024';
+
+      const socialBtn = document.getElementById('modal-social-link');
+      if (member.social && member.social.trim() !== '') {
+        socialBtn.href = member.social;
+        socialBtn.classList.remove('hidden');
+        socialBtn.classList.add('flex');
+      } else {
+        socialBtn.classList.add('hidden');
+        socialBtn.classList.remove('flex');
+      }
+
+      // Show Admin Edit/Delete controls inside modal ONLY if Admin is logged in
+      const adminActions = document.getElementById('modal-admin-actions');
+      if (isAdminLoggedIn) {
+        adminActions.classList.remove('hidden');
+        adminActions.classList.add('grid');
+        document.getElementById('modal-edit-btn').onclick = () => {
+          closeProfileModal();
+          openMemberModal(member.id);
+        };
+        document.getElementById('modal-delete-btn').onclick = () => {
+          closeProfileModal();
+          promptDeleteMember(member.id);
+        };
+      } else {
+        adminActions.classList.add('hidden');
+        adminActions.classList.remove('grid');
+      }
+
+      const modal = document.getElementById('profile-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeProfileModal() {
+      const modal = document.getElementById('profile-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // ==================== SINGLE-ADMIN AUTHENTICATION ====================
+    function togglePasswordVisibility() {
+      const input = document.getElementById('admin-password');
+      const icon = document.getElementById('password-eye-icon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+      } else {
+        input.type = 'password';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+      }
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const userVal = document.getElementById('admin-username').value.trim().toLowerCase();
+      const passVal = document.getElementById('admin-password').value;
+      const errEl = document.getElementById('login-error-msg');
+
+      if (userVal === ADMIN_USERNAME && passVal === adminPassword) {
+        isAdminLoggedIn = true;
+        sessionStorage.setItem(ADMIN_AUTH_KEY, 'true');
+        localStorage.setItem(ADMIN_AUTH_KEY, 'true');
+        errEl.classList.add('hidden');
+        document.getElementById('admin-password').value = '';
+        updateAdminUIIndicators();
+        showToast('Welcome back, Swallowed Admin');
+        navigateTo('admin');
+      } else {
+        errEl.classList.remove('hidden');
+        showToast('Invalid Admin credentials', true);
+      }
+    }
+
+    function handleAdminLogout() {
+      isAdminLoggedIn = false;
+      sessionStorage.removeItem(ADMIN_AUTH_KEY);
+      localStorage.removeItem(ADMIN_AUTH_KEY);
+      updateAdminUIIndicators();
+      showToast('Admin locked. Switched to View-Only Mode');
+      navigateTo('home');
+    }
+
+    function updateAdminUIIndicators() {
+      const navIcon = document.getElementById('nav-admin-icon');
+      const navLabel = document.getElementById('nav-admin-label');
+      const navBadge = document.getElementById('nav-admin-badge');
+      const homeAdminText = document.getElementById('home-admin-text');
+
+      if (isAdminLoggedIn) {
+        navIcon.className = 'fa-solid fa-unlock text-[10px] text-emerald-500';
+        navLabel.textContent = 'ADMIN PANEL';
+        navBadge.classList.remove('hidden');
+        if (homeAdminText) homeAdminText.textContent = 'ADMIN PANEL';
+      } else {
+        navIcon.className = 'fa-solid fa-lock text-[10px]';
+        navLabel.textContent = 'ADMIN';
+        navBadge.classList.add('hidden');
+        if (homeAdminText) homeAdminText.textContent = 'ADMIN LOGIN';
+      }
+    }
+
+    // ==================== ADMIN COMMAND CENTER OPERATIONS ====================
+    function renderAdminDashboard() {
+      if (!isAdminLoggedIn) {
+        navigateTo('admin');
+        return;
+      }
+
+      document.getElementById('stat-total').textContent = members.length;
+      document.getElementById('stat-leaders').textContent = members.filter(m => m.tier === 'LEADER').length;
+      document.getElementById('stat-elite').textContent = members.filter(m => m.tier === 'ELITE').length;
+      document.getElementById('stat-members').textContent = members.filter(m => m.tier === 'MEMBER').length;
+
+      const tbody = document.getElementById('admin-roster-tbody');
+      if (members.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="py-10 text-center text-white/45 font-mono text-xs">
+              No members in roster. Click "+ ADD MEMBER" to create your first Swallowed member.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = members.map(m => {
+        const tierStyle = m.tier === 'LEADER'
+          ? 'bg-amber-200/15 text-amber-200 border-amber-200/30'
+          : m.tier === 'ELITE'
+            ? 'bg-white/15 text-white border-white/25'
+            : 'bg-white/5 text-white/65 border-white/10';
+
+        const toggleRoleTitle = m.tier === 'LEADER' ? 'Demote to Member' : 'Promote to Leader';
+        const toggleRoleIcon = m.tier === 'LEADER' ? 'fa-arrow-down' : 'fa-crown';
+
+        return `
+          <tr class="hover:bg-white/[0.04] transition-colors">
+            <td class="py-3 px-4">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl overflow-hidden border border-white/15 flex-shrink-0 bg-zinc-900">
+                  ${getAvatarHTML(m)}
+                </div>
+                <div>
+                  <p class="font-bold text-white">${escapeHTML(m.name)}</p>
+                  <p class="text-[10px] text-white/40 truncate max-w-[180px] sm:hidden">${escapeHTML(m.position || '')}</p>
+                </div>
+              </div>
+            </td>
+            <td class="py-3 px-3">
+              <span class="font-mono text-[10px] tracking-[0.15em] uppercase px-2.5 py-1 rounded-full border ${tierStyle}">
+                ${m.tier}
+              </span>
+            </td>
+            <td class="py-3 px-3 font-mono text-[11px] text-white/75 uppercase">
+              ${escapeHTML(m.position || '-')}
+            </td>
+            <td class="py-3 px-3 hidden md:table-cell font-mono text-[11px] text-white/50">
+              ${escapeHTML(m.handle || '-')}
+            </td>
+            <td class="py-3 px-3 hidden lg:table-cell font-mono text-[11px] text-white/45">
+              ${escapeHTML(m.joined || '-')}
+            </td>
+            <td class="py-3 px-4 text-right">
+              <div class="inline-flex items-center gap-1.5">
+                <button onclick="quickToggleTier('${m.id}')" title="${toggleRoleTitle}"
+                  class="w-7 h-7 rounded-lg bg-amber-200/10 hover:bg-amber-200/25 text-amber-200 flex items-center justify-center transition-colors">
+                  <i class="fa-solid ${toggleRoleIcon} text-[10px]"></i>
+                </button>
+                <button onclick="openMemberModal('${m.id}')" title="Edit Details"
+                  class="w-7 h-7 rounded-lg bg-white/10 hover:bg-white/25 text-white/85 hover:text-white flex items-center justify-center transition-colors">
+                  <i class="fa-solid fa-pen text-[10px]"></i>
+                </button>
+                <button onclick="promptDeleteMember('${m.id}')" title="Remove Member"
+                  class="w-7 h-7 rounded-lg bg-red-500/15 hover:bg-red-500/35 text-red-300 flex items-center justify-center transition-colors">
+                  <i class="fa-solid fa-trash text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function quickToggleTier(id) {
+      if (!isAdminLoggedIn) return;
+      const idx = members.findIndex(m => m.id === id);
+      if (idx === -1) return;
+
+      const current = members[idx].tier;
+      members[idx].tier = current === 'LEADER' ? 'MEMBER' : 'LEADER';
+      saveRoster();
+      renderAdminDashboard();
+      if (currentView === 'members') renderMembers();
+      showToast(`${members[idx].name} is now ${members[idx].tier}`);
+    }
+
+    // Add / Edit Member Modal Controls
+    function renderAvatarPresets() {
+      const container = document.getElementById('avatar-presets-list');
+      container.innerHTML = AVATAR_PRESETS.map(url => `
+        <button type="button" onclick="selectAvatarPreset('${url}')"
+          class="w-9 h-9 rounded-lg overflow-hidden border border-white/20 hover:border-white flex-shrink-0 transition-transform hover:scale-105">
+          <img src="${url}" class="w-full h-full object-cover grayscale" />
+        </button>
+      `).join('');
+    }
+
+    function selectAvatarPreset(url) {
+      document.getElementById('edit-member-avatar').value = url;
+      updateFormAvatarPreview();
+    }
+
+    function clearAvatarImage() {
+      document.getElementById('edit-member-avatar').value = '';
+      updateFormAvatarPreview();
+    }
+
+    function handleAvatarFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        // Resize image via canvas to keep localStorage lightweight
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          const maxSize = 240;
+          let w = img.width;
+          let h = img.height;
+          if (w > h) {
+            if (w > maxSize) { h *= maxSize / w; w = maxSize; }
+          } else {
+            if (h > maxSize) { w *= maxSize / h; h = maxSize; }
+          }
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+          document.getElementById('edit-member-avatar').value = compressedDataUrl;
+          updateFormAvatarPreview();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function updateFormAvatarPreview() {
+      const previewEl = document.getElementById('form-avatar-preview');
+      const mockMember = {
+        name: document.getElementById('edit-member-name').value || 'SW',
+        tier: document.getElementById('edit-member-tier').value,
+        avatar: document.getElementById('edit-member-avatar').value
+      };
+      previewEl.innerHTML = getAvatarHTML(mockMember);
+    }
+
+    function openMemberModal(id = null) {
+      if (!isAdminLoggedIn) {
+        showToast('Admin authentication required', true);
+        navigateTo('admin');
+        return;
+      }
+
+      renderAvatarPresets();
+      const modal = document.getElementById('edit-member-modal');
+      const title = document.getElementById('edit-modal-title');
+      const todayStr = new Date().toISOString().split('T')[0];
+
+      if (id) {
+        const m = members.find(item => item.id === id);
+        if (!m) return;
+        title.textContent = 'EDIT SWALLOWED MEMBER';
+        document.getElementById('edit-member-id').value = m.id;
+        document.getElementById('edit-member-name').value = m.name;
+        document.getElementById('edit-member-tier').value = m.tier;
+        document.getElementById('edit-member-position').value = m.position || '';
+        document.getElementById('edit-member-handle').value = m.handle || '';
+        document.getElementById('edit-member-joined').value = m.joined || todayStr;
+        document.getElementById('edit-member-social').value = m.social || '';
+        document.getElementById('edit-member-avatar').value = m.avatar || '';
+        document.getElementById('edit-member-bio').value = m.bio || '';
+      } else {
+        title.textContent = 'ADD SWALLOWED MEMBER';
+        document.getElementById('edit-member-id').value = '';
+        document.getElementById('edit-member-name').value = '';
+        document.getElementById('edit-member-tier').value = 'MEMBER';
+        document.getElementById('edit-member-position').value = 'OPERATIVE';
+        document.getElementById('edit-member-handle').value = '';
+        document.getElementById('edit-member-joined').value = todayStr;
+        document.getElementById('edit-member-social').value = '';
+        document.getElementById('edit-member-avatar').value = '';
+        document.getElementById('edit-member-bio').value = '';
+      }
+
+      updateFormAvatarPreview();
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeMemberModal() {
+      const modal = document.getElementById('edit-member-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function saveMemberForm(e) {
+      e.preventDefault();
+      if (!isAdminLoggedIn) return;
+
+      const id = document.getElementById('edit-member-id').value;
+      const name = document.getElementById('edit-member-name').value.trim();
+      const tier = document.getElementById('edit-member-tier').value;
+      const position = document.getElementById('edit-member-position').value.trim().toUpperCase() || 'OPERATIVE';
+      const handle = document.getElementById('edit-member-handle').value.trim() || `@${name.toLowerCase().replace(/\s+/g, '.')}`;
+      const joined = document.getElementById('edit-member-joined').value || new Date().toISOString().split('T')[0];
+      const social = document.getElementById('edit-member-social').value.trim();
+      const avatar = document.getElementById('edit-member-avatar').value.trim();
+      const bio = document.getElementById('edit-member-bio').value.trim();
+
+      if (id) {
+        const idx = members.findIndex(m => m.id === id);
+        if (idx !== -1) {
+          members[idx] = { ...members[idx], name, tier, position, handle, joined, social, avatar, bio };
+          showToast(`Updated ${name}`);
+        }
+      } else {
+        members.unshift({
+          id: 'sw-' + Date.now(),
+          name,
+          tier,
+          position,
+          handle,
+          joined,
+          social,
+          avatar,
+          bio
+        });
+        showToast(`Added ${name} to SWALLOWED`);
+      }
+
+      saveRoster();
+      closeMemberModal();
+      populatePositionFilter();
+      if (currentView === 'admin') renderAdminDashboard();
+      if (currentView === 'members') renderMembers();
+    }
+
+    // Custom Confirmation Dialog (Delete / Reset)
+    function promptDeleteMember(id) {
+      if (!isAdminLoggedIn) return;
+      const target = members.find(m => m.id === id);
+      if (!target) return;
+      openConfirmModal('DELETE_MEMBER', target);
+    }
+
+    function openConfirmModal(actionType, payload = null) {
+      const modal = document.getElementById('confirm-modal');
+      const title = document.getElementById('confirm-modal-title');
+      const desc = document.getElementById('confirm-modal-desc');
+      const yesBtn = document.getElementById('confirm-modal-yes-btn');
+
+      if (actionType === 'DELETE_MEMBER' && payload) {
+        title.textContent = 'REMOVE MEMBER';
+        desc.textContent = `ยืนยันการลบ "${payload.name}" ออกจากรายชื่อ SWALLOWED หรือไม่?`;
+        yesBtn.onclick = () => {
+          members = members.filter(m => m.id !== payload.id);
+          saveRoster();
+          closeConfirmModal();
+          if (currentView === 'admin') renderAdminDashboard();
+          if (currentView === 'members') renderMembers();
+          showToast(`Removed ${payload.name}`);
+        };
+      } else if (actionType === 'RESET_DEFAULT') {
+        title.textContent = 'RESET ROSTER';
+        desc.textContent = 'คืนค่ารายชื่อสมาชิก SWALLOWED กลับเป็นค่าเริ่มต้นทั้งหมดหรือไม่?';
+        yesBtn.onclick = () => {
+          members = [...DEFAULT_MEMBERS];
+          saveRoster();
+          closeConfirmModal();
+          renderAdminDashboard();
+          showToast('Swallowed roster reset to default');
+        };
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeConfirmModal() {
+      const modal = document.getElementById('confirm-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Admin Password Change
+    function openChangePasswordModal() {
+      if (!isAdminLoggedIn) return;
+      document.getElementById('new-admin-pass-input').value = '';
+      const modal = document.getElementById('change-pass-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeChangePasswordModal() {
+      const modal = document.getElementById('change-pass-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function saveNewAdminPassword(e) {
+      e.preventDefault();
+      if (!isAdminLoggedIn) return;
+      const newPass = document.getElementById('new-admin-pass-input').value.trim();
+      if (newPass.length < 4) return;
+      adminPassword = newPass;
+      localStorage.setItem(ADMIN_PASS_KEY, adminPassword);
+      document.getElementById('hint-pass-display').textContent = adminPassword;
+      closeChangePasswordModal();
+      showToast('Admin password updated successfully');
+    }
+
+    // Export & Import JSON Backup
+    function exportRosterJSON() {
+      if (!isAdminLoggedIn) return;
+      const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(members, null, 2));
+      const dlAnchor = document.createElement('a');
+      dlAnchor.setAttribute('href', dataStr);
+      dlAnchor.setAttribute('download', `swallowed-roster-${new Date().toISOString().slice(0, 10)}.json`);
+      document.body.appendChild(dlAnchor);
+      dlAnchor.click();
+      dlAnchor.remove();
+      showToast('Exported Swallowed Roster JSON');
+    }
+
+    function importRosterJSON(event) {
+      if (!isAdminLoggedIn) return;
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (Array.isArray(imported)) {
+            members = imported;
+            saveRoster();
+            renderAdminDashboard();
+            showToast(`Imported ${imported.length} members`);
+          } else {
+            showToast('Invalid JSON format', true);
+          }
+        } catch (err) {
+          showToast('Failed to parse JSON file', true);
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    // Toast & Utility
+    function showToast(message, isError = false) {
+      const toast = document.getElementById('toast');
+      const icon = document.getElementById('toast-icon');
+      document.getElementById('toast-msg').textContent = message;
+      icon.className = isError
+        ? 'fa-solid fa-circle-exclamation text-red-400 text-xs'
+        : 'fa-solid fa-circle-check text-emerald-400 text-xs';
+      toast.classList.remove('opacity-0', 'translate-y-2');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+      }, 3000);
+    }
+
+    function escapeHTML(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // ==================== 5. AMBIENT LOUNGE SYNTHESIZER ====================
+    const TRACKS = [
+      { title: 'Obsidian Nocturne', artist: 'Swallowed Lounge', chords: [[196.00, 246.94, 293.66, 369.99], [164.81, 196.00, 246.94, 329.63], [146.83, 174.61, 220.00, 261.63], [196.00, 246.94, 293.66, 349.23]] },
+      { title: 'Abyssal Velvet', artist: 'Swallowed Midnight', chords: [[220, 261.63, 329.63, 392.00], [174.61, 220, 261.63, 329.63], [196.00, 246.94, 293.66, 349.23], [164.81, 196.00, 246.94, 293.66]] },
+      { title: 'Crown of Shadows', artist: 'Swallowed Archives', chords: [[261.63, 329.63, 392.00, 493.88], [220.00, 261.63, 329.63, 392.00], [174.61, 220.00, 261.63, 349.23], [196.00, 246.94, 293.66, 392.00]] }
+    ];
+
+    let audioCtx = null;
+    let masterGain = null;
+    let isPlayingAudio = false;
+    let currentTrackIdx = 0;
+    let chordStep = 0;
+    let chordInterval = null;
+
+    function toggleAmbientAudio() {
+      isPlayingAudio ? stopAmbientAudio() : startAmbientAudio();
+    }
+
+    function startAmbientAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+        masterGain = audioCtx.createGain();
+        masterGain.gain.value = parseFloat(document.getElementById('ambient-volume').value) * 0.25;
+        masterGain.connect(audioCtx.destination);
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      isPlayingAudio = true;
+      updatePlayerUI();
+      playCurrentChord();
+
+      clearInterval(chordInterval);
+      chordInterval = setInterval(() => {
+        chordStep = (chordStep + 1) % TRACKS[currentTrackIdx].chords.length;
+        playCurrentChord();
+      }, 3200);
+    }
+
+    function stopAmbientAudio() {
+      isPlayingAudio = false;
+      clearInterval(chordInterval);
+      updatePlayerUI();
+    }
+
+    function nextAmbientTrack() {
+      currentTrackIdx = (currentTrackIdx + 1) % TRACKS.length;
+      chordStep = 0;
+      document.getElementById('track-title').textContent = TRACKS[currentTrackIdx].title;
+      document.getElementById('track-artist').textContent = TRACKS[currentTrackIdx].artist;
+      if (isPlayingAudio) playCurrentChord();
+    }
+
+    function updateAmbientVolume(val) {
+      if (masterGain && audioCtx) {
+        masterGain.gain.setTargetAtTime(parseFloat(val) * 0.25, audioCtx.currentTime, 0.05);
+      }
+    }
+
+    function playCurrentChord() {
+      if (!isPlayingAudio || !audioCtx) return;
+      const now = audioCtx.currentTime;
+      const freqs = TRACKS[currentTrackIdx].chords[chordStep];
+
+      freqs.forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const noteGain = audioCtx.createGain();
+        const filter = audioCtx.createBiquadFilter();
+
+        osc.type = i % 2 === 0 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(freq, now);
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(620, now);
+
+        noteGain.gain.setValueAtTime(0.0001, now);
+        noteGain.gain.exponentialRampToValueAtTime(0.18 / freqs.length, now + 0.6);
+        noteGain.gain.exponentialRampToValueAtTime(0.0001, now + 3.1);
+
+        osc.connect(filter);
+        filter.connect(noteGain);
+        noteGain.connect(masterGain);
+
+        osc.start(now);
+        osc.stop(now + 3.15);
+      });
+    }
+
+    function updatePlayerUI() {
+      const icon = document.getElementById('play-pause-icon');
+      const eq = document.getElementById('eq-bars');
+      if (isPlayingAudio) {
+        icon.className = 'fa-solid fa-pause';
+        eq.classList.remove('opacity-0');
+        eq.classList.add('eq-playing');
+      } else {
+        icon.className = 'fa-solid fa-play ml-0.5';
+        eq.classList.add('opacity-0');
+        eq.classList.remove('eq-playing');
+      }
+    }
+
+    // Subtle Floating Ember/Dust Canvas Particles
+    function initParticles() {
+      const canvas = document.getElementById('ambient-particles');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      for (let i = 0; i < 36; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.4 + 0.4,
+          vy: -(Math.random() * 0.25 + 0.08),
+          vx: (Math.random() - 0.5) * 0.15,
+          alpha: Math.random() * 0.35 + 0.08
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+          ctx.fill();
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    // Boot Application
+    window.addEventListener('DOMContentLoaded', () => {
+      initStorage();
+      updateAdminUIIndicators();
+      initParticles();
+      navigateTo('home');
+    });
+  </script>
+</body>
+</html>
